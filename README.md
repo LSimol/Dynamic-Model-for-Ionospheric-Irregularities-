@@ -1,1 +1,1 @@
-# Dynamic-Model-for-Ionospheric-Irregularities-
+# Dynamic-Model-for-Ionospheric-Irregularities
