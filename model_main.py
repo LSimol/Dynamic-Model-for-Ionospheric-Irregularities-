@@ -7,6 +7,31 @@ from matplotlib.ticker import (MultipleLocator, AutoLocator)
 from scipy.interpolate import interp1d
 import pickle
 
+#Define the function that loads all spherical harmonic coefficients given the path of the folder.
+def load_all_dict(path):
+
+    '''Be sure to dowload from the git page the spha_coeff folder: Then use the path of the dowloaded folder as an input for this function'''
+
+    with open(path + 'alm_dict_N_ne.pkl', 'rb') as f:
+        alm_dict_N_ne = pickle.load(f)
+
+    with open(path + 'alm_dict_S_ne.pkl', 'rb') as f:
+        alm_dict_S_ne = pickle.load(f)
+
+    with open(path + 'alm_dict_N_gamma2.pkl', 'rb') as f:
+        alm_dict_N_gamma2 = pickle.load(f)
+
+    with open(path + 'alm_dict_S_gamma2.pkl', 'rb') as f:
+        alm_dict_S_gamma2 = pickle.load(f)
+
+    with open(path + 'alm_dict_N_rodi.pkl', 'rb') as f:
+        alm_dict_N_rodi = pickle.load(f)
+
+    with open(path + 'alm_dict_S_rodi.pkl', 'rb') as f:
+        alm_dict_S_rodi = pickle.load(f)
+
+    return alm_dict_N_ne, alm_dict_S_ne, alm_dict_N_gamma2, alm_dict_S_gamma2, alm_dict_N_rodi, alm_dict_S_rodi
+
 
 # Define the function to interpolate spherical harmonic coefficients based on input conditions
 def spha_coefficients_from_conditions(alm_dict, solar_activity_input, clock_angle_input, season_input):
