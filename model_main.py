@@ -5,6 +5,7 @@ from healpy.newvisufunc import projview, newprojplot
 import matplotlib.colors
 from matplotlib.ticker import (MultipleLocator, AutoLocator)
 from scipy.interpolate import interp1d
+import pickle
 
 
 # Define the function to interpolate spherical harmonic coefficients based on input conditions
