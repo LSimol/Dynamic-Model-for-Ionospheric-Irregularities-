@@ -19,7 +19,7 @@ If you plan to use the Model in your research or publications, please make sure 
 
 An example on how to get and plot the outputs of the model is provided in the example.py file.
 
-###Updates and Contributions
+### Updates and Contributions
 
 This repository is **under active development**, and improvements will be continuously made.
 Feel free to contribute by submitting issues, feature requests, or pull requests
