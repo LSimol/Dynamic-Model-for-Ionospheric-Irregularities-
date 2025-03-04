@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import healpy as hp
 from healpy.newvisufunc import projview, newprojplot
-import matplotlib.colors
 from matplotlib.ticker import (MultipleLocator, AutoLocator)
 from scipy.interpolate import interp1d
 import pickle
@@ -109,6 +108,41 @@ def spha_coefficients_from_conditions(alm_dict, solar_activity_input, clock_angl
             CFI_clock_angle[i] = interp_func(clock_angle_input)
 
         return CFI_clock_angle
+    
+    # Handle case for interpolation of solar activity level only
+    if solar_activity_input not in solar_activities and clock_angle_input in clock_angles:
+        # Find the exact clock angle tag
+        clock_angle_tag = next(key for key, value in clock_angle_values.items() if np.isclose(clock_angle_input, value))
+        
+        # Find the closest two solar activity levels for interpolation
+        if solar_activity_input > max(solar_activities):  # Extrapolate above max value
+            solar_activity_upper = sorted(solar_activities)[-1]
+            solar_activity_lower = sorted(solar_activities)[-2]
+        elif solar_activity_input < min(solar_activities):  # Extrapolate below min value
+            solar_activity_upper = sorted(solar_activities)[1]
+            solar_activity_lower = sorted(solar_activities)[0]
+        else:  # Interpolate between closest solar activity levels
+            solar_activity_upper = max([sa for sa in solar_activities if sa <= solar_activity_input])
+            solar_activity_lower = min([sa for sa in solar_activities if sa >= solar_activity_input])
+
+        # Get the solar activity tags
+        solar_activity_upper_tag = next(key for key, value in solar_activity_levels.items() if value == solar_activity_upper)
+        solar_activity_lower_tag = next(key for key, value in solar_activity_levels.items() if value == solar_activity_lower)
+
+        # Retrieve coefficients for both solar activity levels
+        coef_upper = alm_dict[solar_activity_upper_tag][season_input][clock_angle_tag]
+        coef_lower = alm_dict[solar_activity_lower_tag][season_input][clock_angle_tag]
+
+        # Interpolate over solar activity levels
+        CFI = np.zeros_like(coef_upper)
+        for i in range(coef_upper.shape[0]):
+            interp_func = interp1d([solar_activity_lower, solar_activity_upper], 
+                                [coef_lower[i], coef_upper[i]], 
+                                kind='linear', fill_value='extrapolate')
+            CFI[i] = interp_func(solar_activity_input)
+
+        return CFI
+
 
     # Handle circular interpolation for both solar activity and clock angle
     if solar_activity_input not in solar_activities and clock_angle_input not in clock_angles:
