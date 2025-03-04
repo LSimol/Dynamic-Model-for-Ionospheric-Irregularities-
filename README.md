@@ -21,5 +21,5 @@ An example on how to get and plot the outputs of the model is provided in the ex
 
 ### Updates and Contributions
 
-This repository is **under active development**, and improvements will be continuously made.
+This repository is **currently in the development phase (alpha version)** and will be continuously improved.
 Feel free to contribute by submitting issues, feature requests, or pull requests
