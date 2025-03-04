@@ -11,4 +11,4 @@ Further details regarding the model and its perfomance can be found in Mestici e
 
 If you plan to use the Model in your research or publications, please make sure to cite the corresponding paper. 
 
-An example on how plot the output of the model is provided in the example.py file.
+An example on how to get and plot the outputs of the model is provided in the example.py file.
