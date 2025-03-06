@@ -17,7 +17,7 @@ Further details regarding the model and its performance can be found in **Mestic
 
 If you plan to use the Model in your research or publications, please make sure to cite the corresponding paper. 
 
-An example on how to get and plot the outputs of the model is provided in the example.py file.
+An example on how to get and plot the outputs of the model is provided in the example.py/ipynb file.
 
 ### Updates and Contributions
 
